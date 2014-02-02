@@ -3,7 +3,7 @@
     "main": "./html/index.html",
 "window": {
     "show": true,
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "position": "center",
     "width": 470,

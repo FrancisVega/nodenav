@@ -126,7 +126,6 @@ $(document).ready(function() {
         }
 
 
-
         /*
             IMAGE
         */
@@ -136,6 +135,16 @@ $(document).ready(function() {
         var src_files_shifted = shift(src_files, 1);
 
         var files_to_convert = src_files.length;
+        
+        /*
+            LIGHTBOX
+        */
+        // $(this).css('display', 'block');
+        $('#processing').fadeIn('fast');
+        $('#processing .dst').html(pynav_dst);
+
+
+
         for (var i=0;i<files_to_convert;i++) {
             
             /*
@@ -189,5 +198,12 @@ $(document).ready(function() {
             // write html file
             fs.writeFile(htm_filepath, tmpl);
         }
+
+        $( ".done" ).click(function() {
+            $('#processing').fadeOut('fast', function() {
+               $(this).css('display', 'none');
+            })
+        });
+
     });
 });
