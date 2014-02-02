@@ -18,7 +18,7 @@ $(document).ready(function() {
             CONVERT = "vendor/win/convert.exe";
             break;
         case "win32":
-            CONVERT = "C:/Program Files/Adobe2/Adobe Photoshop CC (64 Bit)/convert.exe";
+            CONVERT = "vendor/win/convert.exe";
     }
 
     // Get file extension .ext
