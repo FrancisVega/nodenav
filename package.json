@@ -1,0 +1,16 @@
+{
+    "name": "nodenav",
+    "main": "./html/index.html",
+"window": {
+    "show": true,
+    "toolbar": false,
+    "frame": true,
+    "position": "center",
+    "width": 470,
+    "height": 652,
+    "min_width": 470,
+    "min_height": 652,
+    "max_width": 470,
+    "max_height": 640
+  }
+}

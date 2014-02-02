@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: "Open Sans";
+      -webkit-app-region: drag;
+}
+
+
+button {
+    -webkit-transition-property: background;
+    -webkit-transition-duration: 500ms;
+}
+
+ul { list-style: none; }
+
+html, body { height: 100%; 
+    overflow:hidden;
+    background:transparent;    
+    -webkit-border-radius:0;
+}
+
+
+.container {
+    color: white;
+    width: 100%;
+    min-width: 470px;
+    height: 100%;
+    overflow: hidden;
+    background-color: #28272c;
+    margin: 0 auto;
+    background-image: -webkit-linear-gradient( 90deg, rgb(45,44,50) 0%, rgb(23,22,25) 100%);
+    overflow: hidden;
+}
+
+.drag {
+    height: 25px;
+    /*background-image: url("imgs/buttons.png");*/
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-position: 20px 20px;
+}
+
+
+/*
+
+    INPUT DATA
+
+*/
+
+.logo {
+    margin: 25px 0 30px 0;
+    padding: 0 50px;
+}
+
+.logo h1 {
+    /*text-align: center;*/
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-size: 30px;
+    color: #ea3a5b;
+    font-family: "Open Sans";    
+}
+
+.logo h2 {
+    font-family: "Open Sans Light";
+    font-size: 14px;
+    color: #68686a;
+}
+
+
+.input-data {
+    padding: 0 50px;
+}
+
+.input-data .title input {
+    height: 60px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ea3a5b;
+    font-size: 25px;
+    padding: 0 20px;
+    color: gray;
+    margin: 0 0 15px 0;
+}
+
+.input-data .src,
+.input-data .dst {
+    margin: 0 0 15px 0;
+    overflow: hidden;    
+    position: relative;
+}
+
+.input-data .src .left,
+.input-data .dst .left {
+    width: 100%;
+    overflow: hidden;
+    /*padding: 0 75px 0 0;*/
+}
+
+.input-data .src .right,
+.input-data .dst .right {
+    float: right;
+    width: 60px;
+    left: 0 60px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.input-data .src input[type='text'],
+.input-data .dst input[type='text'] {
+    float: left;
+    height: 50px;
+    width: 100%;
+    border-radius: 3px;
+    font-size: 16px;
+    color: gray;
+    border: 0;
+    background-color: #dfe6e6;
+    padding: 0 20px;
+}
+
+.input-data .src input[type='button'],
+.input-data .dst input[type='button'] {    
+    height: 50px;
+    width: 100%;
+    border-radius: 3px;
+    border: 0;
+    font-size: 16px;
+    background-color: #ea3a5b;
+    text-shadow: 0 1px #d67691;
+    font-family: "Open Sans Italic";
+    /*padding: 0 20px;*/
+}
+
+.input-data .src input[type='button']:hover,
+.input-data .dst input[type='button']:hover { 
+    background-color: #f2768e;
+    cursor: pointer;
+}
+
+
+/*
+
+    FILE FORMATS
+
+*/
+
+.format {
+    /*background-color: #2d2c32;*/
+    overflow: hidden;
+    padding: 20px 50px;
+    color: #acacad;
+}
+
+p.block-title {
+    font-family: "Open Sans Light";    
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.format .source-format,
+.format .destination-format {
+    width: 50%;
+    float: left;
+}
+
+.format .source-format p,
+.format .destination-format p{
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.format .source-format li,
+.format .destination-format li {
+    float: left;
+    margin: 0 15px 0  0;
+}
+
+.format .source-format li input[type="radio"],
+.format .destination-format li input[type="radio"] {
+    float: left;    
+    display: block;
+    height: 20px;
+    overflow: hidden;
+}
+
+.format .source-format li label,
+.format .destination-format li label {
+    font-size: 13px;
+    float: left;
+    display:block;
+    margin: 0 0 0 5px;
+    opacity: 0.65;
+}
+
+
+/*
+
+    OPTIONS
+
+*/
+
+.options {
+    /*background-color: #353439;*/
+    clear: left;
+    padding: 20px 50px 25px 50px;
+    overflow: hidden;
+    /*height: 180px;*/
+    color: #acacad;
+}
+
+.options li {
+    margin: 0 0 10px 0;
+}
+
+.options li label {
+    margin: 0 0 0 5px;
+    font-size: 14px;
+}
+
+/*
+
+    CREATE BUTTON
+
+*/
+
+.create {
+    width: 100%;
+    height: 100px;
+}
+
+.create button {
+    font-family: "Open Sans Light";
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 2px;
+    border: 0;
+    cursor:pointer;
+    background-color: #2f9a86;
+}
+
+.create button:hover {
+    background-color: rgb(57,186,162);
+}
+
+.create button.disabled {
+    background-color: gray;
+}
+
+.create button.enabled {
+    background-color: yellow;
+}
