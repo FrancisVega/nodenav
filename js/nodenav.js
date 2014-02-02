@@ -80,16 +80,12 @@ $(document).ready(function() {
         // $('#submit-button').prop('disabled', this.value.trim().length);
         if(this.value.trim()) {
             $('#submit-button').removeClass('disabled');
+            $('#submit-button').prop('disabled', 0);
         } else {
             $('#submit-button').addClass('disabled');
+            $('#submit-button').prop('disabled', 1);
         }
     });
-
-
-
-
-
-
 
 
     /*

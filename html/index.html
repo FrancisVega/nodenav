@@ -14,10 +14,10 @@
 </head>
 <body>
 
+<div class="drag" style="-webkit-app-region: drag">v0.1</div>
 <div class="container">
 
 <div class="input-block">
-<!-- <div class="drag" style="-webkit-app-region: drag"></div> -->
 
     <div class="logo">
         <h1>nodenav</h1>
@@ -100,14 +100,19 @@
 
     <!-- Create -->
     <div class="create">
-        <button id="submit-button" class="disabled">Create</button>
+        <button id="submit-button" class="disabled" disabled>Create</button>
+    </div>
+
+    <!-- processing -->
+    <div id="processing">
+        <h1>processing</h1>
     </div>
 
 </div>
 
 <script src="../js/jquery-2.1.0.min.js" type="text/javascript"></script>
-<script src="../js/main.js" type="text/javascript"></script>
-<script src="../js/pynav.js" type="text/javascript"></script>
+<!-- <script src="../js/main.js" type="text/javascript"></script> -->
+<script src="../js/nodenav.js" type="text/javascript"></script>
 
 </body>
 </html>

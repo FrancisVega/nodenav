@@ -3,14 +3,14 @@
     "main": "./html/index.html",
 "window": {
     "show": true,
-    "toolbar": false,
+    "toolbar": true,
     "frame": true,
     "position": "center",
     "width": 470,
-    "height": 652,
+    "height": 672,
     "min_width": 470,
-    "min_height": 652,
+    "min_height": 672,
     "max_width": 470,
-    "max_height": 640
+    "max_height": 672
   }
 }
