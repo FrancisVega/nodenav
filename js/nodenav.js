@@ -75,7 +75,7 @@ $(document).ready(function() {
     */
 
     // Enable button when type a title
-    $("#pynav-title").on('keyup blur', function() {
+    $("#nodenav-title").on('keyup blur', function() {
         // $('#submit-button').prop('disabled', this.value.trim().length);
         if(this.value.trim()) {
             $('#submit-button').removeClass('disabled');
@@ -100,49 +100,43 @@ $(document).ready(function() {
         */
 
         // Title and Paths
-        var pynav_title = $("#pynav-title").val();
-        var pynav_src = $("#pynav-src").val();
-        var pynav_dst = $("#pynav-dst").val();
+        var nodenav_title = $("#nodenav-title").val();
+        var nodenav_src = $("#nodenav-src").val();
+        var nodenav_dst = $("#nodenav-dst").val();
 
         // File formats
-        var pynav_src_format = $('input[name=input-format]:checked').val();
-        var pynav_dst_format = $('input[name=output-format]:checked').val();
+        var nodenav_src_format = $('input[name=input-format]:checked').val();
+        var nodenav_dst_format = $('input[name=output-format]:checked').val();
 
         // Options
-        var pynav_mobile = $('input[name=mobile]:checked').val();
-        var pynav_index = $('input[name=index]:checked').val();
-        var pynav_overwrite = $('input[name=overwrite]:checked').val();
-
+        var nodenav_mobile = $('input[name=mobile]:checked').val();
+        var nodenav_index = $('input[name=index]:checked').val();
+        var nodenav_overwrite = $('input[name=overwrite]:checked').val();
 
         /*
             DST DIRECTORY
         */
 
         try {
-            fs.mkdirSync(pynav_dst)
+            fs.mkdirSync(nodenav_dst)
         } catch(err) {
-            console.log("Directory " + pynav_dst + " exists")
+            console.log("Directory " + nodenav_dst + " exists")
         }
-
 
         /*
             IMAGE
         */
 
-        // Read JUST files and make src, dst and html full path files
-        var src_files = get_file_list(pynav_src, pynav_src_format, full_path = false);
+        var src_files = get_file_list(nodenav_src, nodenav_src_format, full_path = false);
         var src_files_shifted = shift(src_files, 1);
-
         var files_to_convert = src_files.length;
 
         /*
             LIGHTBOX
         */
-        // $(this).css('display', 'block');
+
         $('#processing').fadeIn('fast');
-        $('#processing .dst').html(pynav_dst);
-
-
+        $('#processing .dst').html(nodenav_dst);
 
         for (var i=0;i<files_to_convert;i++) {
 
@@ -151,18 +145,18 @@ $(document).ready(function() {
             */
 
             // Regexp pattern to grab .extension
-            var re = new RegExp("\."+pynav_src_format+"$");
+            var re = new RegExp("\."+nodenav_src_format+"$");
 
             // files
             var src_file = src_files[i]
-            var dst_file = src_files[i].replace(re, "."+pynav_dst_format);
+            var dst_file = src_files[i].replace(re, "."+nodenav_dst_format);
             var htm_file = src_files[i].replace(re, ".html");
             var htm_tar_file = src_files_shifted[i].replace(re, ".html");
 
             // join files to path
-            src_filepath = path.join(pynav_src, src_file);
-            dst_filepath = path.join(pynav_dst, dst_file);
-            htm_filepath = path.join(pynav_dst, htm_file);
+            src_filepath = path.join(nodenav_src, src_file);
+            dst_filepath = path.join(nodenav_dst, dst_file);
+            htm_filepath = path.join(nodenav_dst, htm_file);
 
             // source file dimension
             var dimensions = sizeOf(src_filepath);
@@ -172,39 +166,45 @@ $(document).ready(function() {
             /*
                 IMAGE CONVERT
             */
-            // src == psd
-            if(pynav_src_format=="psd") { src_filepath += "[0]"; }
 
-            console.log(CONVERT, src_filepath, dst_filepath)
-
+            if(nodenav_src_format=="psd") { src_filepath += "[0]"; } // workaround to psd convert
             child_process.execFile(CONVERT, [src_filepath, '-quality', '100', dst_filepath], function(error, stdout, stderr){ console.log(stdout); });
 
             /*
-                HTML
+                HTML TEMPLATES
             */
 
-            // Load correct template
-            var tmpl;
-            if(pynav_mobile) {
-                tmpl = load_template('html/pynav-mobile.html');
+            // Navigation
+            var nav_tmpl;            
+            if(nodenav_mobile) {
+                nav_tmpl = load_template('html/nodenav-mobile.html');
             } else {
-                tmpl = load_template('html/pynav-desktop.html');
+                nav_tmpl = load_template('html/nodenav-desktop.html');
             }
 
-            // replace pynav tags
-            tmpl = tmpl.replace(/\[pynav-title\]/, pynav_title)
-            tmpl = tmpl.replace(/\[pynav-img\]/, dst_file)
-            tmpl = tmpl.replace(/\[pynav-img-width\]/, img_width)
-            tmpl = tmpl.replace(/\[pynav-img-height\]/, img_height)
-            tmpl = tmpl.replace(/\[pynav-next-html\]/, htm_tar_file)
+            // replace nodenav tags
+            nav_tmpl = nav_tmpl.replace(/\[nodenav-title\]/, nodenav_title)
+            nav_tmpl = nav_tmpl.replace(/\[nodenav-img\]/, dst_file)
+            nav_tmpl = nav_tmpl.replace(/\[nodenav-img-width\]/, img_width)
+            nav_tmpl = nav_tmpl.replace(/\[nodenav-img-height\]/, img_height)
+            nav_tmpl = nav_tmpl.replace(/\[nodenav-next-html\]/, htm_tar_file)
             // write html file
-            fs.writeFile(htm_filepath, tmpl);
+            fs.writeFile(htm_filepath, nav_tmpl);
+
+            // Index
+            var index_nav_tmpl;
+            if (nodenav_index) {
+                index_nav_tmpl = load_template('html/nodenav-index.html');
+                index_nav_tmpl = index_nav_tmpl.replace(/\[nodenav-title\]/, nodenav_title);
+                index_nav_tmpl = index_nav_tmpl.replace(/\[nodenav-page-link\]/, nodenav_li_link);
+            }
+            
         }
 
-        $( ".done" ).click(function() {
+        $(".done").click(function() {
             $('#processing').fadeOut('fast', function() {
                $(this).css('display', 'none');
-            })
+            });
         });
 
     });
