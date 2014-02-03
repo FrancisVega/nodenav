@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
     /*
@@ -15,7 +14,7 @@ $(document).ready(function() {
     // Platform convert app
     switch (platform()) {
         case "darwin":
-            CONVERT = "vendor/win/convert.exe";
+            CONVERT = "vendor/osx/convert";
             break;
         case "win32":
             CONVERT = "vendor/win/convert.exe";
@@ -135,7 +134,7 @@ $(document).ready(function() {
         var src_files_shifted = shift(src_files, 1);
 
         var files_to_convert = src_files.length;
-        
+
         /*
             LIGHTBOX
         */
@@ -146,7 +145,7 @@ $(document).ready(function() {
 
 
         for (var i=0;i<files_to_convert;i++) {
-            
+
             /*
                 SET PATHS
             */
@@ -155,7 +154,7 @@ $(document).ready(function() {
             var re = new RegExp("\."+pynav_src_format+"$");
 
             // files
-            var src_file = src_files[i]            
+            var src_file = src_files[i]
             var dst_file = src_files[i].replace(re, "."+pynav_dst_format);
             var htm_file = src_files[i].replace(re, ".html");
             var htm_tar_file = src_files_shifted[i].replace(re, ".html");
@@ -175,6 +174,9 @@ $(document).ready(function() {
             */
             // src == psd
             if(pynav_src_format=="psd") { src_filepath += "[0]"; }
+
+            console.log(CONVERT, src_filepath, dst_filepath)
+
             child_process.execFile(CONVERT, [src_filepath, '-quality', '100', dst_filepath], function(error, stdout, stderr){ console.log(stdout); });
 
             /*
@@ -184,12 +186,12 @@ $(document).ready(function() {
             // Load correct template
             var tmpl;
             if(pynav_mobile) {
-                tmpl = load_template('html/pynav-mobile.html');    
+                tmpl = load_template('html/pynav-mobile.html');
             } else {
                 tmpl = load_template('html/pynav-desktop.html');
             }
-            
-            // replace pynav tags            
+
+            // replace pynav tags
             tmpl = tmpl.replace(/\[pynav-title\]/, pynav_title)
             tmpl = tmpl.replace(/\[pynav-img\]/, dst_file)
             tmpl = tmpl.replace(/\[pynav-img-width\]/, img_width)
